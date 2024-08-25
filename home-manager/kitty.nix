@@ -1,5 +1,7 @@
 { inputs, pkgs, ... }: {
 
+  stylix.targets.kitty.enable = true;
+
   programs.kitty = {
     enable = true;
     shellIntegration.enableZshIntegration = true;
@@ -9,4 +11,14 @@
       hide_window_decorations = true;
     };
   };
+
+  programs = {
+    zsh = {
+      shellAliases = {
+        icat = "kitten icat";
+        ssh = "kitten ssh";
+      };
+    };
+  };
+
 }

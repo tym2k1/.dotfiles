@@ -2,7 +2,6 @@
 
 home.packages = with pkgs; [
   distrobox
-  docker
 ];
 
 home.file.".config/distrobox/distrobox.conf".text =

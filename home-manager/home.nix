@@ -1,7 +1,11 @@
-{ config, pkgs, inputs, userConf, ... }:
+{ config, pkgs, inputs, userConf, lib, ... }:
 
+let
+  isNixOS = builtins.pathExists "/etc/NIXOS";
+in
 {
-  
+  # home-manager.backupFileExtension = "backup";
+
   home.username = "${userConf.username}";
   home.homeDirectory = "/home/${userConf.username}";
 
@@ -16,23 +20,18 @@
   fonts.fontconfig.enable = true;
 
   home.packages = with pkgs; [
-    du-dust
-    btop
-    xdragon
-    tldr
-    ctpv
-    fzf
-    logseq
-    fastfetch
-    trash-cli
+    # logseq
     nh
     thunderbird
-    unzip
-    file
     zathura
     qpwgraph
     discord
     gnupg
+    matterhorn
+    bambu-studio
+    obsidian
+    freetube
+    wayst
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -48,13 +47,14 @@
   ];
 
   imports = [
+    ./stylix
     ./cli-tools
     ./git
+    ./development
     ./kitty.nix
     ./hyprland
     ./development
-    ./graphics
-    ./stylix
+    ./firefox
+    # ./graphics
   ];
-
 }

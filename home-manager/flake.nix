@@ -25,44 +25,61 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    firefox-addons = {
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, nixvim, stylix, zjstatus, ... }@inputs:
+  outputs = { nixpkgs, home-manager, nixvim, stylix, zjstatus, firefox-addons, ... }@inputs:
     let
       userConf = import ../config.nix;
       # pkgs = nixpkgs.legacyPackages.${userConf.system};
       overlays = with inputs; [
-	# ...
-	(final: prev: {
-	  zjstatus = zjstatus.packages.${prev.system}.default;
-	})
+        # ...
+        (final: prev: {
+          zjstatus = zjstatus.packages.${prev.system}.default;
+        })
       ];
       pkgs = import nixpkgs {
         system = userConf.system;
         overlays = overlays;
-	config = {
-	  allowUnfree = true;
-	  allowUnfreePredicate = (_: true);
-	};
+        config = {
+          allowUnfree = true;
+          allowUnfreePredicate = (_: true);
+        };
       };
     in {
       homeConfigurations = {
-	${userConf.username} = home-manager.lib.homeManagerConfiguration {
-	  inherit pkgs;
+        ${userConf.username} = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
 
-	  # Specify your home configuration modules here, for example,
-	  # the path to your home.nix.
-	  modules = [
-	  ./home.nix
-	  stylix.homeManagerModules.stylix
-	  ];
-	  
-	  extraSpecialArgs = {
-	    inherit inputs userConf;
-	  };
-	  # Optionally use extraSpecialArgs
-	  # to pass through arguments to home.nix
-	};
+          # Specify your home configuration modules here, for example,
+          # the path to your home.nix.
+          modules = [
+          ./home.nix
+          stylix.homeManagerModules.stylix
+          ];
+          
+          extraSpecialArgs = {
+            inherit inputs userConf;
+          };
+          # Optionally use extraSpecialArgs
+          # to pass through arguments to home.nix
+        };
+        # tburak = home-manager.lib.homeManagerConfiguration {
+        #   inherit pkgs;
+
+        #   modules = [
+        #   ./work.nix
+        #   stylix.homeManagerModules.stylix
+        #   ];
+        #   
+        #   extraSpecialArgs = {
+        #     inherit inputs userConf;
+        #   };
+        # };
+
       };
     };
 }

@@ -20,7 +20,7 @@
       themes = {
 	default = {
 	  fg = "#${config.lib.stylix.colors.base07}";
-	  bg = "#${config.lib.stylix.colors.base00}";
+	  bg = "#${config.lib.stylix.colors.base01}";
 	  black = "#${config.lib.stylix.colors.base00}";
 	  red = "#${config.lib.stylix.colors.base08}";
 	  green = "#${config.lib.stylix.colors.base0B}";

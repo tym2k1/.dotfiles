@@ -7,7 +7,7 @@ home.packages = with pkgs; [
 programs = {
   zsh = {
     shellAliases = {
-      cat = "bat --style plain --pager never --theme base16";  
+      cat = "bat --style plain --pager never --theme base16";
     };
   };
 };

@@ -10,8 +10,8 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    gnomeExtensions.blur-my-shell
-    gnomeExtensions.pano
-  ];
+#  environment.systemPackages = with pkgs; [
+#    gnomeExtensions.blur-my-shell
+#    gnomeExtensions.pano
+#  ];
 }

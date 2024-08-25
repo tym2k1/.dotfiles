@@ -1,9 +1,13 @@
 { inputs, pkgs, ... }: {
 
-  services.lorri = {
-    enable = true;
-    enableNotifications = true;
-  };
+  home.packages = with pkgs; [
+    devenv
+  ];
+
+  # services.lorri = {
+  #   enable = true;
+  #   enableNotifications = true;
+  # };
 
   programs.direnv = {
     enable = true;

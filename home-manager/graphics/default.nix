@@ -1,8 +1,9 @@
 { inputs, pkgs, ... }: {
 
-  home.packages = [
-    pkgs.inkscape
-    pkgs.gimp
+  home.packages = with pkgs; [
+    inkscape
+    gimp
+    freecad
   ];
 
 }

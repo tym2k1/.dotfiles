@@ -9,8 +9,25 @@ imports = [
   ./lf
   ./nh
   ./distrobox
-  ./lorri
+  ./devenv
   ./ripgrep
+  ./taskwarrior
+  ];
+
+
+  home.packages = with pkgs; [
+    du-dust
+    btop
+    xdragon
+    tldr
+    ctpv
+    fzf
+    fastfetch
+    trash-cli
+    nh
+    unzip
+    file
+    sage
   ];
 
 }

@@ -11,6 +11,7 @@
       ./steam
       ./stylix
       ./gnome
+      ./qemu
       # ./wayfire
       # ./hyprland
     ];
@@ -97,7 +98,7 @@
     users.tym2k1 = {
       isNormalUser = true;
       description = "Tymoteusz Burak";
-      extraGroups = [ "networkmanager" "wheel" "docker" ];
+      extraGroups = [ "networkmanager" "wheel" "docker" "dialout"];
     };
   };
   
@@ -112,12 +113,12 @@
   systemd.services."getty@tty1".enable = false;
   systemd.services."autovt@tty1".enable = false;
 
-  # Install firefox.
-  programs.firefox.enable = true;
   programs.zsh.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+
+  nix.trustedUsers = [ "tym2k1" "@wheel" ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -125,6 +126,7 @@
     vim
     wget
     home-manager
+    docker
   ];
 
 
@@ -154,9 +156,9 @@
 
   services.pcscd.enable = true;
   programs.gnupg.agent = {
-     enable = true;
-     pinentryFlavor = "curses";
-     enableSSHSupport = true;
+    pinentryPackage = pkgs.pinentry-curses;
+    enable = true;
+    enableSSHSupport = true;
   };
 
   # Some programs need SUID wrappers, can be configured further or are

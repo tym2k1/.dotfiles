@@ -1,41 +1,32 @@
-{ inputs, pkgs, userConf, ... }: {
+{ inputs, pkgs, ... }: {
 
-#  programs.nh = {
-#    enable = true;
-#    clean.enable = true;
-#    clean.extraArgs = "--keep-since 4d --keep 3";
-#  };
-
-
-  home.packages = with pkgs;[
+  home.packages = with pkgs; [
     nh
   ];
-  
-  # This is ugly. Related issue https://github.com/viperML/nh/issues/88
-  # Take a look at https://github.com/viperML/wrapper-manager 
-#programs.zsh.initExtra = ''
-#  nh_home() {
-#    command nh home "$1" "$${@:2}" /home/${userConf.username}/.dotfiles/home-manager
-#  }
-#
-#  nh_os() {
-#    command nh os "$1" "$${@:2}" /home/${userConf.username}/.dotfiles/nixos
-#  }
-#
-#  nh() {
-#    case "$1" in
-#      home)
-#        shift
-#        nh_home "$@"
-#        ;;
-#      os)
-#        shift
-#        nh_os "$@"
-#        ;;
-#      *)
-#        echo "Unknown command: $1"
-#        ;;
-#    esac
-#  }
-#'';
+
 }
+#pkgs.stdenv.mkDerivation {
+#  name = "nh-wrapper";
+#  src = null;
+#
+#  buildInputs = [ pkgs.nh pkgs.wrapProgram ];
+#
+#  phases = [ "installPhase" ];
+#
+#  installPhase = ''
+#    mkdir -p $out/bin
+#
+#    # Use wrapProgram to create a wrapped nh with custom environment variable logic
+#    wrapProgram ${pkgs.nh}/bin/nh \
+#      --prefix PATH : ${pkgs.coreutils}/binju\
+#      --run 'if [ "$1" = "os" ]; then export FLAKE=/path/to/your/nixos-flake; elif [ "$1" = "home" ]; then export FLAKE=/path/to/your/home-manager-flake; fi; exec "$@"'
+#
+#    mv ${pkgs.nh}/bin/nh $out/bin/nh
+#  '';
+#
+#  meta = with pkgs.lib; {
+#    description = "Wrapper for nh that sets different FLAKE environment variables for 'os' and 'home' commands";
+#    license = licenses.mit;
+#    maintainers = [ maintainers.yourself ];
+#  };
+#}
