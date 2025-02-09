@@ -1,13 +1,18 @@
 { inputs, userConf, ... }: {
 
+  imports = [
+    # ./rnote.nix
+    # ./zk-visgraph.nix
+  ];
+
   programs.nixvim = {
     keymaps = [
       {
         action = "<cmd>ZkNotes<CR>";
-        key = "<leader>zl";
+        key = "<leader>zs";
         options = {
           silent = true;
-          desc = "Search Notes";
+          desc = "Search notes by name";
         };
       }
       {
@@ -15,7 +20,7 @@
         key = "<leader>zt";
         options = {
           silent = true;
-          desc = "Search Tags";
+          desc = "Search notes by tags";
         };
       }
       {
@@ -24,6 +29,22 @@
         options = {
           silent = true;
           desc = "New Note";
+        };
+      }
+      {
+        action = "<cmd>ZkBacklinks<CR>";
+        key = "<leader>zb";
+        options = {
+          silent = true;
+          desc = "See backlinks to this note";
+        };
+      }
+      {
+        action = "<cmd>ZkLinks<CR>";
+        key = "<leader>zl";
+        options = {
+          silent = true;
+          desc = "List notes linked in this note";
         };
       }
     ];

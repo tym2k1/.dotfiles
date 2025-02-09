@@ -1,8 +1,8 @@
 { inputs, pkgs, ... }: {
 
-home.packages = with pkgs; [
-  taskopen
-];
+#home.packages = with pkgs; [
+#  taskopen
+#];
 
 home.sessionVariables = {
   ZK_NOTEBOOK_DIR = "$HOME/Notes/Zk";
@@ -51,9 +51,8 @@ programs = {
   };
 
   taskwarrior = {
-    # config = {
-    #   
-    # };
+    enable = true;
+    package = pkgs.taskwarrior3;
   };
 };
 

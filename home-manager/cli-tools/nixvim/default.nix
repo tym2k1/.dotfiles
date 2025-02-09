@@ -11,8 +11,8 @@
     ./cmp
     ./zk
     ./which-key
-    # ./bullets
-    # ./comment
+    ./markview
+    ./fidget
   ];
 
   programs.nixvim = {
@@ -27,13 +27,29 @@
     opts = {
       number = true;
       expandtab = true;
-      shiftwidth = 2;
+      shiftwidth = 4;
       title = true;
       titlelen = 0;
-      titlestring = "nvim:%{fnamemodify(expand('%:p'), ':~')}"; 
+      titlestring = "nvim:%{fnamemodify(expand('%:p'), ':~')}";
+      conceallevel = 2;
+      selection="old";
     };
     plugins = {
-      lualine.enable = true;
+        lualine = {
+            enable = true;
+            settings.options = {
+                    component_separators = {
+                        left = "";
+                        right = "";
+                    };
+                    section_separators = {
+                        left = "";
+                        right = "";
+                    };
+            };
+        };
+      web-devicons.enable = true;
+      trim.enable = true;
     };
     colorschemes.base16 = {
       enable = true;

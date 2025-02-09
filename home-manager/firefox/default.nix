@@ -29,6 +29,8 @@
         tree-style-tab
         tst-indent-line
         tst-active-tab-on-scroll-bar
+        tst-fade-old-tabs
+        tst-bookmarks-subpanel
         bitwarden
         tridactyl
       ];

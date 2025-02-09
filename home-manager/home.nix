@@ -1,8 +1,5 @@
-{ config, pkgs, inputs, userConf, lib, ... }:
+{ inputs, pkgs, userConf, ... }:
 
-let
-  isNixOS = builtins.pathExists "/etc/NIXOS";
-in
 {
   # home-manager.backupFileExtension = "backup";
 
@@ -20,18 +17,25 @@ in
   fonts.fontconfig.enable = true;
 
   home.packages = with pkgs; [
-    # logseq
     nh
+    kicad
     thunderbird
     zathura
     qpwgraph
     discord
     gnupg
-    matterhorn
     bambu-studio
     obsidian
-    freetube
-    wayst
+    gimp
+    freecad-wayland
+    virt-manager
+    reaper
+    vital
+    plugdata
+    libsixel
+    blender
+    inkscape
+    nerd-fonts.fira-code
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -46,15 +50,21 @@ in
     # '')
   ];
 
+  stylix.fonts.monospace = {
+      package = pkgs.nerd-fonts.fira-code;
+      name = "FiraCode Nerd Font";
+  };
+
   imports = [
     ./stylix
     ./cli-tools
     ./git
     ./development
-    ./kitty.nix
-    ./hyprland
+    # ./kitty.nix
+    # ./hyprland
     ./development
     ./firefox
+    ./wezterm.nix
     # ./graphics
   ];
 }

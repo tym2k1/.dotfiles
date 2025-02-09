@@ -1,6 +1,5 @@
 { inputs, pkgs, config, ... }:
 {
-
 home.file.".config/zellij/layouts/default.kdl".text =
     ''
 layout {
@@ -8,30 +7,35 @@ layout {
     children
     pane size=1 borderless=true {
       plugin location="file:${pkgs.zjstatus}/bin/zjstatus.wasm" {
-	format_left  "#[fg=#${config.lib.stylix.colors.base07},bold] {session} {mode} {tabs}"
-	format_right "#[bg=#${config.lib.stylix.colors.base0B},fg=#${config.lib.stylix.colors.base00}] #[bg=#${config.lib.stylix.colors.base0B},fg=#${config.lib.stylix.colors.base00},bold]{swap_layout} #[bg=#${config.lib.stylix.colors.base00},fg=#${config.lib.stylix.colors.base0B}]"
+	format_left  "{mode} {tabs}#[bg=#${config.lib.stylix.colors.base00},fg=#${config.lib.stylix.colors.base01}]"
+	format_right "#[bg=#${config.lib.stylix.colors.base00},fg=#${config.lib.stylix.colors.base01}]#[bg=#${config.lib.stylix.colors.base01},fg=#${config.lib.stylix.colors.base07},bold]{swap_layout}{session}#[bg=#${config.lib.stylix.colors.base00},fg=#${config.lib.stylix.colors.base01}]"
 
-	mode_locked "#[fg=#${config.lib.stylix.colors.base0E},bold] {name}"
-	mode_normal "#[fg=#${config.lib.stylix.colors.base0B},bold] {name}"
-	mode_resize "#[fg=#${config.lib.stylix.colors.base0F},bold] {name}"
+	mode_locked "#[bg=#${config.lib.stylix.colors.base00},fg=#${config.lib.stylix.colors.base0E}]#[bg=#${config.lib.stylix.colors.base0E},fg=#${config.lib.stylix.colors.base00},bold]{name}#[bg=#${config.lib.stylix.colors.base01},fg=#${config.lib.stylix.colors.base0E}]"
+	mode_normal "#[bg=#${config.lib.stylix.colors.base00},fg=#${config.lib.stylix.colors.base0B}]#[bg=#${config.lib.stylix.colors.base0B},fg=#${config.lib.stylix.colors.base00},bold]{name}#[bg=#${config.lib.stylix.colors.base01},fg=#${config.lib.stylix.colors.base0B}]"
+	mode_resize "#[bg=#${config.lib.stylix.colors.base00},fg=#${config.lib.stylix.colors.base0F}]#[bg=#${config.lib.stylix.colors.base0F},fg=#${config.lib.stylix.colors.base00},bold]{name}#[bg=#${config.lib.stylix.colors.base01},fg=#${config.lib.stylix.colors.base0F}]"
 	mode_default_to_mode "resize"
 
-	tab_normal "#[bg=#${config.lib.stylix.colors.base07},fg=#${config.lib.stylix.colors.base00}] #[bg=#${config.lib.stylix.colors.base07},fg=#${config.lib.stylix.colors.base00},bold]{name} {sync_indicator}{fullscreen_indicator}{floating_indicator}#[bg=#${config.lib.stylix.colors.base00},fg=#${config.lib.stylix.colors.base07}]"
-	tab_active "#[bg=#${config.lib.stylix.colors.base0B},fg=#${config.lib.stylix.colors.base00}] #[bg=#${config.lib.stylix.colors.base0B},fg=#${config.lib.stylix.colors.base00},bold]{name} {sync_indicator}{fullscreen_indicator}{floating_indicator}#[bg=#${config.lib.stylix.colors.base00},fg=#${config.lib.stylix.colors.base0B}]"
+	tab_normal "#[bg=#${config.lib.stylix.colors.base00},fg=#${config.lib.stylix.colors.base04}]#[bg=#${config.lib.stylix.colors.base04},fg=#${config.lib.stylix.colors.base01},bold]{index}#[bg=#${config.lib.stylix.colors.base01},fg=#${config.lib.stylix.colors.base04}] {name}{sync_indicator}{fullscreen_indicator}{floating_indicator}"
+	tab_active "#[bg=#${config.lib.stylix.colors.base00},fg=#${config.lib.stylix.colors.base0B}]#[bg=#${config.lib.stylix.colors.base0B},fg=#${config.lib.stylix.colors.base01},bold]{index}#[bg=#${config.lib.stylix.colors.base01},fg=#${config.lib.stylix.colors.base0B}]#[bg=#${config.lib.stylix.colors.base01},fg=#${config.lib.stylix.colors.base0B},bold] {name}{sync_indicator}{fullscreen_indicator}{floating_indicator}"
 
-	tab_sync_indicator       " "
-	tab_fullscreen_indicator "󰹑 "
-	tab_floating_indicator   "󰉈 "
+        tab_separator "#[bg=#${config.lib.stylix.colors.base00},fg=#${config.lib.stylix.colors.base01}] "
+
+        tab_display_count         "10"
+
+	tab_sync_indicator       "  "
+	tab_fullscreen_indicator " 󰹑 "
+	tab_floating_indicator   " 󰉈 "
       }
     }
   }
+  tab name="New Tab"
 }
     '';
 
 home.file.".config/zellij/layouts/default.swap.kdl".text =
     ''
 
-swap_tiled_layout name="Vertical" {
+swap_tiled_layout name="  " {
 
   tab max_panes=5 {
     pane split_direction="vertical" {
@@ -57,7 +61,7 @@ swap_tiled_layout name="Vertical" {
 
 }
 
-swap_tiled_layout name="Horizontal" {
+swap_tiled_layout name="  " {
 
   tab max_panes=5 {
     pane
@@ -81,7 +85,7 @@ swap_tiled_layout name="Horizontal" {
 
 }
 
-swap_tiled_layout name="Stacked" {
+swap_tiled_layout name="  " {
 
   tab min_panes=5 {
     pane split_direction="vertical" {
@@ -92,11 +96,11 @@ swap_tiled_layout name="Stacked" {
 
 }
 
-swap_floating_layout name="Staggered" {
+swap_floating_layout name="  " {
   floating_panes
 }
 
-swap_floating_layout name="Enlarged" {
+swap_floating_layout name="󰘖  " {
   floating_panes max_panes=10 {
     pane { x "5%"; y 1; width "90%"; height "90%"; }
     pane { x "5%"; y 2; width "90%"; height "90%"; }
@@ -111,7 +115,7 @@ swap_floating_layout name="Enlarged" {
   }
 }
 
-swap_floating_layout name="Spread" {
+swap_floating_layout name="󰁌  " {
   floating_panes max_panes=1 {
     pane {y "50%"; x "50%"; }
   }

@@ -15,13 +15,13 @@ format = """
 [](fg:color_acc1)\
 $os\
 $username\
-[](fg:color_acc1 bg:color_acc2)\
+[](fg:color_acc1 bg:color_acc2)\
 $directory\
-[](fg:color_acc2 bg:color_acc3)\
+[](fg:color_acc2 bg:color_acc3)\
 $git_branch\
 $git_status\
 $git_state\
-[](fg:color_acc3 bg:color_acc4)\
+[](fg:color_acc3 bg:color_acc4)\
 $c\
 $rust\
 $golang\
@@ -31,19 +31,19 @@ $java\
 $kotlin\
 $haskell\
 $python\
-[](fg:color_acc4 bg:color_acc5)\
+[](fg:color_acc4 bg:color_acc5)\
 $nix_shell\
 $docker_context\
 $container\
 $conda\
-[](fg:color_acc5 bg:color_acc6)\
+[](fg:color_acc5 bg:color_acc6)\
 $time\
-[ ](fg:color_acc6)\
+[](fg:color_acc6)\
 $line_break$character"""
 
-palette = 'gruvbox_dark'
+palette = 'colors'
 
-[palettes.gruvbox_dark]
+[palettes.colors]
 color_fg = '#${config.lib.stylix.colors.base07}'
 color_acc1 = '#${config.lib.stylix.colors.base08}'
 color_acc2 = '#${config.lib.stylix.colors.base09}'
@@ -202,7 +202,7 @@ disabled = false
 [character]
 disabled = false
 success_symbol = '[](bold fg:color_acc3)'
-error_symbol = '[](bold fg:color_acc6)'
+error_symbol = '[](bold fg:color_acc1)'
 vimcmd_symbol = '[](bold fg:color_acc3)'
 vimcmd_replace_one_symbol = '[](bold fg:color_acc5)'
 vimcmd_replace_symbol = '[](bold fg:color_acc5)'

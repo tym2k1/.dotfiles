@@ -34,7 +34,7 @@
           };
           window.documentation = {
             border = [
-              "╭" "╴" "╮" "╎" "╯" "╴" "╰" "╎"
+              "╭" "─" "╮" "│" "╯" "─" "╰" "│"
             ];
             winhighlight = "FloatBorder:NormalFloat";
           };
@@ -57,7 +57,7 @@
       };
       cmp-buffer.enable = true;
       cmp-nvim-lsp.enable = true;
-      cmp-nvim-lua.enable = true; 
+      cmp-nvim-lua.enable = true;
       cmp-cmdline.enable = true;
       cmp-path.enable = true;
       cmp-dictionary.enable = true;

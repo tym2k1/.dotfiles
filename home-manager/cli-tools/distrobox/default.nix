@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }: {
+{ pkgs, userConf,... }: {
 
 home.packages = with pkgs; [
   distrobox
@@ -7,6 +7,7 @@ home.packages = with pkgs; [
 home.file.".config/distrobox/distrobox.conf".text =
   ''
 container_additional_volumes="/nix:/nix"
+PATH="$PATH:/home/${userConf.username}/.nix-profile/bin"
   '';
 
 programs.zsh.localVariables = {

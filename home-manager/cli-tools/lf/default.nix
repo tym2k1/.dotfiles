@@ -41,7 +41,7 @@ in {
 	  mkdir $DIR
 	}}
 	'';
-	dragon = ''&${pkgs.xdragon}/bin/xdragon -a -x -T $(echo $fx)'';
+	dragon-out = ''&${pkgs.xdragon}/bin/xdragon -a -x -T $(echo $fx)'';
 	yank-path = ''&${pkgs.wl-clipboard}/bin/wl-copy "$(echo $fx)"'';
 	yank-name = ''&${pkgs.wl-clipboard}/bin/wl-copy "$(echo $fx | while read -r line; do basename "$line"; done)"'';
       };
@@ -74,14 +74,17 @@ in {
 
 
     settings = {
-      preview = true;
-      icons = true;
-      # drawbox = true;
-      ignorecase = true;
-      number = true;
-      autoquit = true;
-      shell = "zsh";
-      info = [ "size" ];
+        preview = true;
+        period = 5;
+        scrolloff = 10;
+        icons = true;
+        sixel = true;
+        # drawbox = true;
+        ignorecase = true;
+        number = true;
+        autoquit = true;
+        shell = "zsh";
+        info = [ "size" ];
     };
 
     previewer = {
@@ -92,6 +95,8 @@ in {
     extraConfig = ''
 set cleaner ${pkgs.ctpv}/bin/ctpvclear
 set cursorpreviewfmt "\033[7m"
+&ctpv -s $id
+&ctpvquit $id
 
 cmd on-quit &{{
   %${pkgs.ctpv}/bin/ctpv -e $id
@@ -100,7 +105,8 @@ cmd on-quit &{{
 
 cmd on-cd &{{
   printf "\033]0; ''${PWD/#$HOME/lf:~}\007" > /dev/tty
-  # fmt="$(STARSHIP_SHELL= starship prompt | sed 's/\\/\\\\/g;s/"/\\"/g')"
+  # fmt="$(STARSHIP_SHELL= starship prompt | sed '3s/.*//' | sed 's/\\/\\\\/g;s/"/\\"/g')"
+  # fmt="$(starship prompt | sed '3s/.*//;s/\\/\\\\/g;s/"/\\"/g;s/%//g;s/}//g;s/{//g')"
   # lf -remote "send $id set promptfmt \"$fmt\""
 }}
 

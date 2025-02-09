@@ -4,7 +4,11 @@
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    
+
+    nixpkgs-stable = {
+      url = "github:nixos/nixpkgs/nixos-24.11";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -31,7 +35,7 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, nixvim, stylix, zjstatus, firefox-addons, ... }@inputs:
+  outputs = { nixpkgs, nixpkgs-stable, home-manager, nixvim, stylix, zjstatus, firefox-addons, ... }@inputs:
     let
       userConf = import ../config.nix;
       # pkgs = nixpkgs.legacyPackages.${userConf.system};
@@ -60,7 +64,7 @@
           ./home.nix
           stylix.homeManagerModules.stylix
           ];
-          
+
           extraSpecialArgs = {
             inherit inputs userConf;
           };
@@ -74,7 +78,7 @@
         #   ./work.nix
         #   stylix.homeManagerModules.stylix
         #   ];
-        #   
+        #
         #   extraSpecialArgs = {
         #     inherit inputs userConf;
         #   };

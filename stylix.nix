@@ -27,10 +27,10 @@
       name = "Fira Sans";
     };
 
-    monospace = {
-      package = (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; });
-      name = "FiraCode";
-    };
+        # monospace = {
+        #   package = pkgs.nerd-fonts.fira-code;
+        #   name = "FiraCode Nerd Font";
+        # };
 
     emoji = {
       package = pkgs.noto-fonts-emoji;
